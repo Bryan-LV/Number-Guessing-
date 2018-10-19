@@ -8,11 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <title>Number Guesser</title>
 </head>
+<style>
+    .min-num,.max-num{
+        width:40px;
+    }
+
+    input[type=number]{
+        padding-right: 0;
+        padding-left:7px;
+    }
+</style>
 <body>
     <div class="container">
         <h1>Number Guesser</h1>
         <div id="game">
-            <p>Guess a number between <span class="min-num">1</span> and <span class="max-num">10</span></p>
+            <p>Guess a number between <input type="number" class="min-num" placeholder="1"> and <input type="number" class="max-num" placeholder="10"></p>
             <input type="number" id="guess-input" placeholder="Enter your guess...">
             <input type="submit" value="Submit" id="guess-value">
             <p class="message"></p>        

@@ -13,17 +13,32 @@ function eventListener(){
     document.addEventListener('click',function(e){
         if(e.target.id === 'guess-value'){
             checkGuess();
-        }
-    }
+        } 
+    });
 
-    // 
-)};
+    // min max numbers event
+    document.addEventListener('keyup',function(e){
+        if(e.target.classList.contains('max-num')){
+            maxNumInput();
+        } else if(e.target.classList.contains('min-num')){
+            minNumInput();
+        }
+    });
+}
+
 
 // Allow user to change min and max numbers
 function checkGuess(){
-    let maxNumber = 10;
-    let randomNum = Math.random() * Math.floor(maxNumber);
-    if(parseFloat(guessInput.value) === 10){
+    let minNumber = minNumInput();
+    let maxNumber = maxNumInput();
+    // random number generated from min-max values
+    function ranNum(min, max){
+        let number = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log(number);
+        return number;
+    }
+    // check if number = random generated number
+    if(parseFloat(guessInput.value) === ranNum(minNumber, maxNumber)){
         message.textContent = 'You guessed the right number!'
         message.style.color = 'green';
     } else if(chances !== 0) {
@@ -31,7 +46,20 @@ function checkGuess(){
         message.textContent = `Sorry, you guessed the wrong number. You have ${chances} left`;
         message.style.color = 'red';
     } else{
-        
+        guessInput.setAttribute('disabled','disabled')
+        guessInput.style.borderColor = 'red';
+        message.textContent = 'Sorry you have used up all your chances :(';
     }
 }
-// check if number = random generated number
+
+function minNumInput(){
+    minNumber.style.border = 'none';
+    let minNumberVal = parseFloat(minNumber.value);
+    return minNumberVal;
+} 
+
+function maxNumInput(){
+    maxNumber.style.border = 'none';
+    let maxNumberVal = parseFloat(maxNumber.value);
+    return maxNumberVal;
+}
